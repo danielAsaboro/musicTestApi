@@ -1,0 +1,9 @@
+{
+    "appName": "vidly-music-app",
+    "data": {
+        "host": "localhost",
+        "defaultPort": "process.env.PORT ",
+        "customizedPort": "3000"
+
+    }
+}

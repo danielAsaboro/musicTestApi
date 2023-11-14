@@ -1,0 +1,6 @@
+{
+    "appPassword": "vidlyPassword",
+    "data": {
+        "jwtSecret": "vidlySecretKey"
+    }
+}
