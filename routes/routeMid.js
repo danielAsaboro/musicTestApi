@@ -1,11 +1,11 @@
-const config = require('config')
+require('dotenv').config();
 const jwt = require('jsonwebtoken')
 
 function auth(req, res, next) {
     const token = req.header('x-auth-token')
     if (!token) return res.status(401).send('access denied')
     try {
-        const decoded = jwt.verify(token, config.get('data.jwtSecret'))
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
         console.log('my decoded', decoded);
         req.loginName = decoded
         console.log('decoded', decoded);

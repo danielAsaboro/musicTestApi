@@ -1,7 +1,6 @@
 const Joi = require('joi')
 const jwt = require('jsonwebtoken')
-const config = require('config')
-
+require('dotenv').config();
 //const passwordCompexity = require('joi-password-complexity')
 const mongoose = require('mongoose')
 
@@ -36,14 +35,13 @@ const userSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 userSchema.methods.authMid = function() {
-    const token = jwt.sign({ _id: this._id, email: this.email }, config.get('data.jwtSecret'), { expiresIn: '1h' })
+    const token = jwt.sign({ _id: this._id, email: this.email }, process.env.JWT_SECRET, { expiresIn: '1h' })
     return token
 
 }
 
 //creating the mode db
 const regisUser = mongoose.model('user', userSchema)
-
 
 //setting a strict password Option
 

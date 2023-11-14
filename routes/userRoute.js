@@ -8,7 +8,7 @@ const complexityOptions = require('../models/user')
 const auth = require('./routeMid')
 const passwordCompexity = require('joi-password-complexity')
 
-router.get('/', auth, async(req, res) => {
+router.get('/', auth, async (req, res) => {
     const getUser = await regisUser.findById(req.loginName._id).select('-password')
     console.log(getUser, 'the user');
     try {
@@ -21,7 +21,7 @@ router.get('/', auth, async(req, res) => {
 
 
 })
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     const { firstName, secondName, email, password, id } = req.body
 
     passwordCompexity(complexityOptions).validate(req.body.password)
@@ -64,7 +64,10 @@ router.post('/', async(req, res) => {
 
         await newRegis.save()
 
-        res.send(newRegis)
+        res.json({
+            details: newRegis,
+            token: regisUser().authMid()
+        })
     }
 
 })
